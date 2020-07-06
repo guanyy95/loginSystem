@@ -1,11 +1,14 @@
 from django.shortcuts import render
 from django.shortcuts import redirect
+from django.views import debug
 from . import models
 from . import form
 
 def index(request):
-    pass
-    return render(request, 'login/index.html')
+    if not request.session.get('is_login', None):
+        return redirect('/login/')
+    else:
+        return render(request, 'login/index.html')
 
 def login(request):
     if request.session.get('is_login', None):
@@ -16,7 +19,6 @@ def login(request):
         if login_form.is_valid():
             username = login_form.cleaned_data.get('username')
             password = login_form.cleaned_data.get('password')
-            #validation_code = login_form.cleaned_data.get('captcha')
             try:
                 user = models.User.objects.get(name=username)
             except:
@@ -45,5 +47,7 @@ def register(request):
     return render(request, 'login/register.html')
 
 def logout(request):
-    pass
-    return redirect("/login/")
+    if not request.session.get('is_login', None):
+        return redirect("login/")
+    request.session.flush()
+    return redirect('/login')
