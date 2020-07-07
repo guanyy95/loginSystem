@@ -121,3 +121,11 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = "smtp.exmail.qq.com"
+EMAIL_PORT = 465
+EMAIL_HOST_USER = 'guanyueyang@amberweather.com'
+EMAIL_HOST_PASSWORD = "8GeSA6JCB5sLtNkM"
+
+CONFIRM_DAYS = 7
