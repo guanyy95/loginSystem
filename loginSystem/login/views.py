@@ -1,6 +1,5 @@
 from django.shortcuts import render
 from django.shortcuts import redirect
-from django.views import debug
 from django.conf import settings
 
 from . import models
@@ -54,6 +53,7 @@ def login(request):
 def register(request):
     if request.session.get('is_login', None):
         return redirect('/index')
+
     if request.method == "POST":
         register_form = form.registerForm(request.POST)
         message = "检查填写内容"
@@ -143,7 +143,7 @@ def hash_code(s, salt='mysite'):
 def make_confirm_string(user):
     now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     code = hash_code(user.name, now)
-    models.ConfirmString.objects.create(code=code, created_time=now)
+    models.ConfirmString.objects.create(code=code, user=user, created_time=now)
     return code
 
 def send_email(email, code):
@@ -159,5 +159,6 @@ def send_email(email, code):
                     <p>请点击站点链接完成注册确认！</p>
                     <p>此链接有效期为{}天！</p>
                     '''.format('127.0.0.1:8000', code, settings.CONFIRM_DAYS)
-    msg = EmailMultiAlternatives(subject, text_content, html_content, settings.EMAIL_HOST_USER, [email])
+    msg = EmailMultiAlternatives(subject, text_content, settings.EMAIL_HOST_USER, [email])
     msg.attach_alternative(html_content, "text/html")
+    print("Successfully send Email")

@@ -30,4 +30,4 @@ class ConfirmString(models.Model):
         return self.user.name + ": " + self.code
     class Meta:
         ordering = ['-created_time']
-        verbose_name = "确认码"
+        verbose_name = '确认码'

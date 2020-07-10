@@ -127,5 +127,6 @@ EMAIL_HOST = "smtp.exmail.qq.com"
 EMAIL_PORT = 465
 EMAIL_HOST_USER = 'guanyueyang@amberweather.com'
 EMAIL_HOST_PASSWORD = "8GeSA6JCB5sLtNkM"
+EMAIL_USE_SSL = True
 
 CONFIRM_DAYS = 7
