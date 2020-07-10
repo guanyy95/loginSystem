@@ -107,7 +107,6 @@ def user_confirm(request):
     code = request.GET.get('code', None)
     if code:
         print("has code")
-    message = ''
 
     try:
         confirm = models.ConfirmString.objects.get(code=code)
@@ -154,7 +153,7 @@ def send_email(email, code):
     text_content = '认证测试注册邮件的正文， 此文为非html文本'
 
     html_content = '''
-                    <p>感谢注册<a href="http://{}/confirm/?code={}" target=blank>www.liujiangblog.com</a>，\
+                    <p>感谢注册<a href="http://{}/confirm/?code={}" target=blank>管乐阳测试.com</a>，\
                     测试注册登录模块的链接</p>
                     <p>请点击站点链接完成注册确认！</p>
                     <p>此链接有效期为{}天！</p>
