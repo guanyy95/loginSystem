@@ -161,4 +161,5 @@ def send_email(email, code):
                     '''.format('127.0.0.1:8000', code, settings.CONFIRM_DAYS)
     msg = EmailMultiAlternatives(subject, text_content, settings.EMAIL_HOST_USER, [email])
     msg.attach_alternative(html_content, "text/html")
+    msg.send()
     print("Successfully send Email")
